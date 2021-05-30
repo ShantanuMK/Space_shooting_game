@@ -3,7 +3,6 @@ from random import randint
 import random
 import time
 
-# displays moving stars in the background.
 class Ball:
     def __init__(self, x, y, speed, radius):
         self.x = x
@@ -19,16 +18,13 @@ class Ball:
     def display(self, screen):
         pygame.draw.circle(screen, (255, 255, 255), (self.x, self.y), self.radius)
 
-# the super class
+#super class
 class unit(pygame.sprite.Sprite):
     def __init__(self, x, y):
         self.x = x
         self.y = y
         pygame.sprite.Sprite.__init__(self)
 
-
-
-# Clickable, game buttons.
 
 class startButton(unit):
     def __init__(self, x, y):
@@ -81,9 +77,6 @@ class PlayAgainButton(unit):
     def display(self):
         self.draw(screen)
 
-
-
-# Classes for each type of unit.
 
 class enemyBullet(unit):
     def __init__(self, x, y):
@@ -175,9 +168,7 @@ class enemy5(enemies):
 
 
 
-        # Game initialization
 def main():
-    # declare the size of the canvas
     pygame.init()
     width = 500
     height = 500
@@ -187,7 +178,7 @@ def main():
     screen = pygame.display.set_mode((width, height))
     WINscreen = pygame.image.load("images/WIN.png")
     
-    # creating lists for each type of instance
+    
     ball_list = []
     gameoverlist = []
     bullets = []
@@ -199,7 +190,7 @@ def main():
     playerWIN_list = []
     PLAY_AGAIN_list = []
 
-    # initializing variables
+    
     KEY_UP = 273
     KEY_DOWN = 274
     KEY_LEFT = 276
@@ -211,7 +202,7 @@ def main():
     black_color = (0, 0, 0)
     font = pygame.font.Font(None, 30)
 
-    # initializing instances of classes
+    
     MyStart = startButton(200, 300)
     MyRetry = RetryButton(150, 300)
     Mygameover = gameover(0,0)
@@ -219,7 +210,7 @@ def main():
     MyPlayAgain = PlayAgainButton(150, 300)
     screen = pygame.display.set_mode((width, height))
 
-    # sprite groups
+    
     bulletgroup = pygame.sprite.Group()
     enemygroup = pygame.sprite.Group()
     enemybulletgroup = pygame.sprite.Group()
@@ -230,7 +221,7 @@ def main():
     playerWINgroup = pygame.sprite.Group()
     PlayAgainGroup = pygame.sprite.Group()
 
-    # adding instances to lists and groups
+    
     playerWINgroup.add(MyWIN)
     playerWIN_list.append(MyWIN)
     gameovergroup.add(Mygameover)
@@ -242,44 +233,42 @@ def main():
     textblock = font.render("", True, (0, 255, 0))
     
 
-    # level/difficulty setup
+    
     def level1():
         level = 1
         for z in range(0, 200, 80):
             for y in range(0, 400, 80):
                 enemy_fighters.append(enemy(y, z, 1))
 
-        # initialize player 1
+        
         player1 = Hero(200, 430)
         playergroup.add(player1)
         player_list.append(player1)
 
-    # level 2 settings
+    
     def level2():
         for z in range(0, 200, 80):
             for y in range(0, 400, 100):
                 enemy_fighters.append(enemy2(y, z, 2))
     
-    # level 3 settings
+    
     def level3():
         for z in range(0, 160, 80):
             for y in range (0, 440, 110):
                 enemy_fighters.append(enemy3(y, z, 3))
 
-    # level 4 settings
+    
     def level4():
         for z in range(0, 240, 80):
             for y in range (0, 440, 110):
                 enemy_fighters.append(enemy4(y, z, 3))
 
-    # level 5 settings
     def level5():
         for z in range(0, 200, 100):
             for y in range (0, 440, 110):
                 enemy_fighters.append(enemy5(y, z, 5))
 
     
-    # random star backgroundk generation
     for i in range(100):
         rndm_y = randint(10, 490)
         rndm_x = randint(10, 490)
